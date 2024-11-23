@@ -12,7 +12,7 @@ struct ModelSelectionView: View {
 
     var body: some View {
         VStack {
-            Text("Select a Model")
+            Text("모델을 선택하세요")
                 .font(.title)
                 .padding()
 
