@@ -1,0 +1,498 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		640144EE2B6D9C3E004E9B6F /* llava_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640144ED2B6D9C3E004E9B6F /* llava_iosApp.swift */; };
+		640144F02B6D9C3E004E9B6F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640144EF2B6D9C3E004E9B6F /* ContentView.swift */; };
+		640144F22B6D9C3F004E9B6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 640144F12B6D9C3F004E9B6F /* Assets.xcassets */; };
+		640144F52B6D9C3F004E9B6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 640144F42B6D9C3F004E9B6F /* Preview Assets.xcassets */; };
+		6437ED962B794E2000DC163F /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 6437ED952B794E2000DC163F /* llama */; };
+		6443C7B62BE3C4B800FD9693 /* sampling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6443C7B52BE3C4B800FD9693 /* sampling.cpp */; };
+		6443C7B82BE9B70000FD9693 /* SamplingWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6443C7B72BE9B70000FD9693 /* SamplingWrapper.mm */; };
+		648FBE0E2B7A5DB70069ED0E /* InferenceScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648FBE0D2B7A5DB70069ED0E /* InferenceScreenView.swift */; };
+		648FBE122B7C587E0069ED0E /* LlamaContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648FBE112B7C587E0069ED0E /* LlamaContext.swift */; };
+		648FBE182B7C61A40069ED0E /* llava.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 648FBE162B7C61A40069ED0E /* llava.cpp */; };
+		648FBE1B2B7C62010069ED0E /* clip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 648FBE192B7C62010069ED0E /* clip.cpp */; };
+		D28EFA552CEB03C100FADAE0 /* ModelSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28EFA542CEB03C100FADAE0 /* ModelSelectionView.swift */; };
+		D2B4AB9F2CE9FE5900F38357 /* mmproj-model-f16.gguf in Resources */ = {isa = PBXBuildFile; fileRef = D2B4AB9D2CE9FE5900F38357 /* mmproj-model-f16.gguf */; };
+		D2C459CD2CD63CC800AB1F8B /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C459CC2CD63CC800AB1F8B /* ChatBubble.swift */; };
+		D2C459CF2CD63D4100AB1F8B /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C459CE2CD63D4100AB1F8B /* ChatMessage.swift */; };
+		D2C459D12CD687BD00AB1F8B /* CameraPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C459D02CD687BD00AB1F8B /* CameraPicker.swift */; };
+		D2C9B92A2CCB9E47008FACC2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C9B9292CCB9E47008FACC2 /* ImagePicker.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		640144EA2B6D9C3E004E9B6F /* llava-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "llava-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		640144ED2B6D9C3E004E9B6F /* llava_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = llava_iosApp.swift; sourceTree = "<group>"; };
+		640144EF2B6D9C3E004E9B6F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		640144F12B6D9C3F004E9B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		640144F42B6D9C3F004E9B6F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6443C77D2BDC520500FD9693 /* sampling.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sampling.hpp; sourceTree = "<group>"; };
+		6443C7B52BE3C4B800FD9693 /* sampling.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sampling.cpp; sourceTree = "<group>"; };
+		6443C7B72BE9B70000FD9693 /* SamplingWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SamplingWrapper.mm; sourceTree = "<group>"; };
+		6443C7B92BE9B71800FD9693 /* SamplingWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SamplingWrapper.h; sourceTree = "<group>"; };
+		648FBE0D2B7A5DB70069ED0E /* InferenceScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceScreenView.swift; sourceTree = "<group>"; };
+		648FBE112B7C587E0069ED0E /* LlamaContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaContext.swift; sourceTree = "<group>"; };
+		648FBE152B7C61A40069ED0E /* llava-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "llava-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		648FBE162B7C61A40069ED0E /* llava.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = llava.cpp; sourceTree = "<group>"; };
+		648FBE172B7C61A40069ED0E /* llava.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = llava.hpp; sourceTree = "<group>"; };
+		648FBE192B7C62010069ED0E /* clip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = clip.cpp; sourceTree = "<group>"; };
+		648FBE1A2B7C62010069ED0E /* clip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = clip.hpp; sourceTree = "<group>"; };
+		648FBE1C2B7C62710069ED0E /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		64A120832BD75CD5002E1763 /* log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		D28EFA542CEB03C100FADAE0 /* ModelSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSelectionView.swift; sourceTree = "<group>"; };
+		D2B4AB9D2CE9FE5900F38357 /* mmproj-model-f16.gguf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mmproj-model-f16.gguf"; sourceTree = "<group>"; };
+		D2B4ABA22CEA000F00F38357 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D2C459CC2CD63CC800AB1F8B /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
+		D2C459CE2CD63D4100AB1F8B /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		D2C459D02CD687BD00AB1F8B /* CameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPicker.swift; sourceTree = "<group>"; };
+		D2C459D22CD70B3C00AB1F8B /* llava-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "llava-ios.entitlements"; sourceTree = "<group>"; };
+		D2C9B9292CCB9E47008FACC2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		640144E72B6D9C3E004E9B6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6437ED962B794E2000DC163F /* llama in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		640144E12B6D9C3E004E9B6F = {
+			isa = PBXGroup;
+			children = (
+				D2B4AB9D2CE9FE5900F38357 /* mmproj-model-f16.gguf */,
+				640144EC2B6D9C3E004E9B6F /* llava-ios */,
+				640144EB2B6D9C3E004E9B6F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		640144EB2B6D9C3E004E9B6F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				640144EA2B6D9C3E004E9B6F /* llava-ios.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		640144EC2B6D9C3E004E9B6F /* llava-ios */ = {
+			isa = PBXGroup;
+			children = (
+				D2B4ABA22CEA000F00F38357 /* Info.plist */,
+				D2C459D22CD70B3C00AB1F8B /* llava-ios.entitlements */,
+				648FBE102B7C58610069ED0E /* Llava */,
+				6437ED972B794E6900DC163F /* UI */,
+				640144ED2B6D9C3E004E9B6F /* llava_iosApp.swift */,
+				640144EF2B6D9C3E004E9B6F /* ContentView.swift */,
+				640144F12B6D9C3F004E9B6F /* Assets.xcassets */,
+				640144F32B6D9C3F004E9B6F /* Preview Content */,
+			);
+			path = "llava-ios";
+			sourceTree = "<group>";
+		};
+		640144F32B6D9C3F004E9B6F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				640144F42B6D9C3F004E9B6F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6437ED972B794E6900DC163F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6437ED982B794E8100DC163F /* Screens */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6437ED982B794E8100DC163F /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				648FBE0F2B7C56820069ED0E /* InferenceScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		648FBE0F2B7C56820069ED0E /* InferenceScreen */ = {
+			isa = PBXGroup;
+			children = (
+				648FBE0D2B7A5DB70069ED0E /* InferenceScreenView.swift */,
+				D2C9B9292CCB9E47008FACC2 /* ImagePicker.swift */,
+				D2C459CC2CD63CC800AB1F8B /* ChatBubble.swift */,
+				D2C459CE2CD63D4100AB1F8B /* ChatMessage.swift */,
+				D2C459D02CD687BD00AB1F8B /* CameraPicker.swift */,
+				D28EFA542CEB03C100FADAE0 /* ModelSelectionView.swift */,
+			);
+			path = InferenceScreen;
+			sourceTree = "<group>";
+		};
+		648FBE102B7C58610069ED0E /* Llava */ = {
+			isa = PBXGroup;
+			children = (
+				648FBE112B7C587E0069ED0E /* LlamaContext.swift */,
+				648FBE162B7C61A40069ED0E /* llava.cpp */,
+				648FBE172B7C61A40069ED0E /* llava.hpp */,
+				648FBE152B7C61A40069ED0E /* llava-ios-Bridging-Header.h */,
+				648FBE192B7C62010069ED0E /* clip.cpp */,
+				648FBE1A2B7C62010069ED0E /* clip.hpp */,
+				648FBE1C2B7C62710069ED0E /* stb_image.h */,
+				64A120832BD75CD5002E1763 /* log.h */,
+				6443C77D2BDC520500FD9693 /* sampling.hpp */,
+				6443C7B52BE3C4B800FD9693 /* sampling.cpp */,
+				6443C7B72BE9B70000FD9693 /* SamplingWrapper.mm */,
+				6443C7B92BE9B71800FD9693 /* SamplingWrapper.h */,
+			);
+			path = Llava;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		640144E92B6D9C3E004E9B6F /* llava-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6401450E2B6D9C3F004E9B6F /* Build configuration list for PBXNativeTarget "llava-ios" */;
+			buildPhases = (
+				640144E62B6D9C3E004E9B6F /* Sources */,
+				640144E72B6D9C3E004E9B6F /* Frameworks */,
+				640144E82B6D9C3E004E9B6F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "llava-ios";
+			packageProductDependencies = (
+				6437ED952B794E2000DC163F /* llama */,
+			);
+			productName = "llava-ios";
+			productReference = 640144EA2B6D9C3E004E9B6F /* llava-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		640144E22B6D9C3E004E9B6F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					ModelF16,
+					ModelQ8,
+				);
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					640144E92B6D9C3E004E9B6F = {
+						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
+					};
+				};
+			};
+			buildConfigurationList = 640144E52B6D9C3E004E9B6F /* Build configuration list for PBXProject "llava-ios" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 640144E12B6D9C3E004E9B6F;
+			packageReferences = (
+				6437ED942B794E2000DC163F /* XCRemoteSwiftPackageReference "llama" */,
+			);
+			productRefGroup = 640144EB2B6D9C3E004E9B6F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				640144E92B6D9C3E004E9B6F /* llava-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		640144E82B6D9C3E004E9B6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2B4AB9F2CE9FE5900F38357 /* mmproj-model-f16.gguf in Resources */,
+				640144F52B6D9C3F004E9B6F /* Preview Assets.xcassets in Resources */,
+				640144F22B6D9C3F004E9B6F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		640144E62B6D9C3E004E9B6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6443C7B82BE9B70000FD9693 /* SamplingWrapper.mm in Sources */,
+				D2C459CD2CD63CC800AB1F8B /* ChatBubble.swift in Sources */,
+				640144F02B6D9C3E004E9B6F /* ContentView.swift in Sources */,
+				D28EFA552CEB03C100FADAE0 /* ModelSelectionView.swift in Sources */,
+				D2C9B92A2CCB9E47008FACC2 /* ImagePicker.swift in Sources */,
+				648FBE1B2B7C62010069ED0E /* clip.cpp in Sources */,
+				648FBE182B7C61A40069ED0E /* llava.cpp in Sources */,
+				6443C7B62BE3C4B800FD9693 /* sampling.cpp in Sources */,
+				D2C459CF2CD63D4100AB1F8B /* ChatMessage.swift in Sources */,
+				648FBE122B7C587E0069ED0E /* LlamaContext.swift in Sources */,
+				648FBE0E2B7A5DB70069ED0E /* InferenceScreenView.swift in Sources */,
+				D2C459D12CD687BD00AB1F8B /* CameraPicker.swift in Sources */,
+				640144EE2B6D9C3E004E9B6F /* llava_iosApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6401450C2B6D9C3F004E9B6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6401450D2B6D9C3F004E9B6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6401450F2B6D9C3F004E9B6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "llava-ios/llava-ios.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"llava-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = D3US9ARW5A;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "llava-ios/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용 권한 요청";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jinhong-Jeong-Ungsang-Yoon.image-chat";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "llava-ios/Llava/llava-ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		640145102B6D9C3F004E9B6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "llava-ios/llava-ios.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"llava-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = D3US9ARW5A;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "llava-ios/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용 권한 요청";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jinhong-Jeong-Ungsang-Yoon.image-chat";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "llava-ios/Llava/llava-ios-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		640144E52B6D9C3E004E9B6F /* Build configuration list for PBXProject "llava-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6401450C2B6D9C3F004E9B6F /* Debug */,
+				6401450D2B6D9C3F004E9B6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6401450E2B6D9C3F004E9B6F /* Build configuration list for PBXNativeTarget "llava-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6401450F2B6D9C3F004E9B6F /* Debug */,
+				640145102B6D9C3F004E9B6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6437ED942B794E2000DC163F /* XCRemoteSwiftPackageReference "llama" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ggerganov/llama.cpp";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6437ED952B794E2000DC163F /* llama */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6437ED942B794E2000DC163F /* XCRemoteSwiftPackageReference "llama" */;
+			productName = llama;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 640144E22B6D9C3E004E9B6F /* Project object */;
+}
