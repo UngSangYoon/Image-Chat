@@ -90,13 +90,13 @@ class AppState: ObservableObject {
     // 기본 제공 모델 정보
     var defaultModels: [LlamaModel] = [
         LlamaModel(
-            name: "Model F16",
+            name: "Model FP16",
             filename: "danube-ko-1.8B-base-F16.gguf",
             url: "https://huggingface.co/Hongik-Project-2024/danube-ko-1.8B-base-F16.gguf/resolve/main/danube-ko-1.8B-base-F16.gguf?download=true",
             status: "notDownloaded"
         ),
         LlamaModel(
-            name: "Model Q8",
+            name: "Model Q8 (Lite Version)",
             filename: "danube-ko-1.8B-base-Q8_0.gguf",
             url: "https://huggingface.co/Hongik-Project-2024/danube-ko-1.8B-base-Q8_0.gguf/resolve/main/danube-ko-1.8B-base-Q8_0.gguf?download=true",
             status: "notDownloaded"
