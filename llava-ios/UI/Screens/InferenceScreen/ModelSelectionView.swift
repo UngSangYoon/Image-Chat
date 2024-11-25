@@ -111,7 +111,7 @@ struct ModelRowView: View {
             return "6GB 이상의 RAM을 가진 기기가 필요합니다."
         }
 
-        if model.name.contains("FP16") && ram < 8 {
+        if model.name.contains("FP16") && ram < 7 {
             return "8GB 이상의 RAM을 가진 기기가 필요합니다."
         }
 
