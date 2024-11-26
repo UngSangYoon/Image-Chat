@@ -13,7 +13,14 @@
 - 모바일 환경 내 이미지 파일 및 카메라 사용 가능
 - Image Chat은 최신 LLaVA 기술과 CLIP 기반 멀티모달 접근 방식을 결합하여, 한국어 자연어 처리 및 이미지 인식 기능을 오프라인으로 제공합니다.
 
+## Visual Chat Example
+
+    <p align="center">
+    <a><img src="Images/Example.png" width="40%"></a> <br>
+    </p>
+    
 ## 사용 가능한 모델
+
 <p align="center">
     <a><img src="Images/Model Selection.png" width="40%"></a> <br>
     </p>
@@ -26,9 +33,10 @@
 - [Model Q8](https://huggingface.co/Hongik-Project-2024/danube-ko-1.8B-base-Q8_0.gguf)
     - [llava-danube-ko-1.8b-instruct](https://huggingface.co/jjhsnail0822/llava-danube-ko-1.8b-instruct) Q8_0 GGUF 모델로 변환
     - 모바일 환경에 적합
-    - 6 GB RAM 기기에서 사용 가능 (iPhone) 13 프로 이후 모델)
-    
+    - 6 GB RAM 기기에서 사용 가능 (iPhone 13 프로 이후 모델)
+
 ## 개발팀원
+
 윤웅상(yws804@naver.com), 정진홍(https://github.com/jjhsnail0822)
 
 ## Related Projects
