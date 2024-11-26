@@ -4,6 +4,12 @@
 //
 //  Created by 윤웅상 on 11/2/24.
 
+//
+//  ContentView.swift
+//  llava-ios
+//
+//  Created by 윤웅상 on 11/2/24.
+
 import SwiftUI
 import Foundation
 import Combine
@@ -204,26 +210,63 @@ class AppState: ObservableObject {
         await llamaContext.completion_init(text: conversationLog, imageBytes: imageBytesToUse)
         
         var collectedResponse = ""
+        var generationCompleted = false
+        var invalidResponseDetected = false // 응답 유효성 확인 플래그
         
         while await llamaContext.n_cur < llamaContext.n_len {
             var result = await llamaContext.completion_loop()
             
+            // 응답 검증: 유효하지 않은 경우 중단
+            if isInvalidResponse(result) {
+                invalidResponseDetected = true
+                break
+            }
+            
             if let range = result.range(of: "###") {
                 let precedingText = result[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
                 collectedResponse += precedingText
+                generationCompleted = true
+                break
+            } else if let range = result.range(of: "</s>") {
+                let precedingText = result[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
+                collectedResponse += precedingText
+                generationCompleted = true
                 break
             } else {
                 collectedResponse += result
             }
         }
         
-        collectedResponse = collectedResponse.trimmingCharacters(in: .whitespacesAndNewlines)
-        conversationLog += "###Assistant: \(collectedResponse) "
-        addMessage(text: collectedResponse, image: nil, isUser: false)
-        
-        DispatchQueue.main.async {
-            self.loadingState = .idle
+        if invalidResponseDetected {
+            // 유효하지 않은 응답 처리
+            DispatchQueue.main.async {
+                self.addMessage(
+                    text: "모델 생성 한계에 도달했습니다. 아래로 스와이프해 새로고침해 주세요.",
+                    image: nil,
+                    isUser: false
+                )
+                self.loadingState = .idle
+            }
+        } else {
+            // 정상적인 응답 처리
+            collectedResponse = collectedResponse.trimmingCharacters(in: .whitespacesAndNewlines)
+            conversationLog += "###Assistant: \(collectedResponse) "
+            addMessage(text: collectedResponse, image: nil, isUser: false)
+            
+            DispatchQueue.main.async {
+                self.loadingState = .idle
+            }
         }
+    }
+
+    // 유효하지 않은 응답 확인 로직
+    private func isInvalidResponse(_ response: String) -> Bool {
+        // "<s>" 혹은 <unk>가 포함
+        if response.contains("<s>") ||
+            response.contains("<unk>") {
+            return true
+        }
+        return false
     }
     
     func clear() async {
