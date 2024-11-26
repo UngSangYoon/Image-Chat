@@ -15,7 +15,7 @@
 
 ## Visual Chat Example
 
-    <p align="center">
+<p align="center">
     <a><img src="Images/Example.png" width="40%"></a> <br>
     </p>
     
