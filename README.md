@@ -2,7 +2,7 @@
 [[Dataset]](https://huggingface.co/datasets/tabtoyou/KoLLaVA-v1.5-Instruct-581k) [[Base Model]](https://huggingface.co/jjhsnail0822/danube-ko-1.8b-base) [[LLaVA Model]](https://huggingface.co/jjhsnail0822/llava-danube-ko-1.8b-instruct)
 
 <p align="center">
-    <a><img src="images/Image Chat Logo.png" width="40%"></a> <br>
+    <a><img src="Images/Image Chat Logo.png" width="40%"></a> <br>
     Image Chat Logo </p>
 
 ## 소개
@@ -15,16 +15,16 @@
 
 ## 사용 가능한 모델
 <p align="center">
-    <a><img src="Model Selection.png" width="40%"></a> <br>
-    Image Chat Logo </p>
+    <a><img src="Images/Model Selection.png" width="40%"></a> <br>
+    </p>
 
-- Model FP 16(https://huggingface.co/Hongik-Project-2024/mmproj-model-f16.gguf)
-    - llava-danube-ko-1.8b-instruct(https://huggingface.co/jjhsnail0822/llava-danube-ko-1.8b-instruct) Fp16 GGUF 모델로 변환
+- [Model FP 16](https://huggingface.co/Hongik-Project-2024/mmproj-model-f16.gguf)
+    - [llava-danube-ko-1.8b-instruct](https://huggingface.co/jjhsnail0822/llava-danube-ko-1.8b-instruct) Fp16 GGUF 모델로 변환
     - 3.75 GB
     - 8 GB RAM 기기에서 사용 가능 (iPhone 15 프로 이후 모델, iPad)
 
-- Model Q8
-    - llava-danube-ko-1.8b-instruct(https://huggingface.co/jjhsnail0822/llava-danube-ko-1.8b-instruct) Q8_0 GGUF 모델로 변환
+- [Model Q8](https://huggingface.co/Hongik-Project-2024/danube-ko-1.8B-base-Q8_0.gguf)
+    - [llava-danube-ko-1.8b-instruct](https://huggingface.co/jjhsnail0822/llava-danube-ko-1.8b-instruct) Q8_0 GGUF 모델로 변환
     - 모바일 환경에 적합
     - 6 GB RAM 기기에서 사용 가능 (iPhone) 13 프로 이후 모델)
     
