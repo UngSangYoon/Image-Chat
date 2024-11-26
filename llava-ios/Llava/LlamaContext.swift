@@ -27,6 +27,7 @@ struct LlamaParams {
 }
 
 actor LlamaContext {
+    private weak var appState: AppState? // AppState의 참조 추가
     private var model: OpaquePointer
     private var context: OpaquePointer
     private var batch: llama_batch
@@ -37,15 +38,15 @@ actor LlamaContext {
     private var sampling_ctx: SamplingWrapper
     private var n_past: Int32 = 0
     private var needsSystemInit = true
-
+    
     /// This variable is used to store temporarily invalid cchars
     private var temporary_invalid_cchars: [CChar]
-
+    
     var n_len: Int32 = 2048
     var n_cur: Int32 = 0
-
+    
     var n_decode: Int32 = 0
-
+    
     init(model: OpaquePointer, context: OpaquePointer, clip_ctx: OpaquePointer?, systemPrompt: String, userPromptPostfix: String) {
         self.model = model
         self.context = context
@@ -58,22 +59,22 @@ actor LlamaContext {
         self.sampling_ctx = SamplingWrapper(llamaCtx: context)
         
     }
-
+    
     deinit {
         if clip_ctx != nil {
             clip_free(clip_ctx)
         }
         llama_batch_free(batch)
         llama_free(context)
-//        self.sampling_ctx.freeSamplingContext()
+        //        self.sampling_ctx.freeSamplingContext()
         llama_free_model(model)
         llama_backend_free()
     }
-
+    
     static func create_context(path: String, clipPath: String?, systemPrompt: String, userPromptPostfix: String) throws -> LlamaContext {
         llama_backend_init()
         var model_params = llama_model_default_params()
-
+        
 #if targetEnvironment(simulator)
         model_params.n_gpu_layers = 0
         print("Running on simulator, force use n_gpu_layers = 0")
@@ -86,16 +87,16 @@ actor LlamaContext {
         let clip_ctx = clipPath.map { clipPath in
             clip_model_load(clipPath, 1)
         }
-
+        
         let n_threads = max(1, min(8, ProcessInfo.processInfo.processorCount - 2))
         print("Using \(n_threads) threads")
-
+        
         var ctx_params = llama_context_default_params()
         ctx_params.seed  = 1234
         ctx_params.n_ctx = 2048
         ctx_params.n_threads       = UInt32(n_threads)
         ctx_params.n_threads_batch = UInt32(n_threads)
-
+        
         let context = llama_new_context_with_model(model, ctx_params)
         
         guard let context else {
@@ -103,30 +104,30 @@ actor LlamaContext {
             throw LlamaError.couldNotInitializeContext
         }
         
-
+        
         return LlamaContext(model: model, context: context, clip_ctx: clip_ctx ?? nil, systemPrompt: systemPrompt, userPromptPostfix: userPromptPostfix)
     }
-
+    
     func model_info() -> String {
         let result = UnsafeMutablePointer<Int8>.allocate(capacity: 256)
         result.initialize(repeating: Int8(0), count: 256)
         defer {
             result.deallocate()
         }
-
+        
         // TODO: this is probably very stupid way to get the string from C
-
+        
         let nChars = llama_model_desc(model, result, 256)
         let bufferPointer = UnsafeBufferPointer(start: result, count: Int(nChars))
-
+        
         var SwiftString = ""
         for char in bufferPointer {
             SwiftString.append(Character(UnicodeScalar(UInt8(char))))
         }
-
+        
         return SwiftString
     }
-
+    
     func get_n_tokens() -> Int32 {
         return batch.n_tokens;
     }
@@ -136,26 +137,28 @@ actor LlamaContext {
         needsSystemInit = false
     }
     
-    // Context에 이미지 정보 포함
-    func completion_init(text: String, imageBytes: [UInt8]?) {
+    func completion_init(text: String, imageBytes: [UInt8]?) async -> Bool {
         print("attempting to complete \"\(text)\"")
         if needsSystemInit {
             completion_system_init()
         }
         
+        var success = true // 기본값 설정
+        
         // Only embed the image if new image bytes are provided
         if let imageBytes = imageBytes {
             var myBytes = imageBytes
             let size = Int32(myBytes.count)
-            let success = myBytes.withUnsafeMutableBytes { raw in
+            success = myBytes.withUnsafeMutableBytes { raw in
                 self.sampling_ctx.embedImage(raw.baseAddress, withSize: size, clipContext: clip_ctx)
             }
             print("Image embedding success: \(success)")
         }
         
         self.sampling_ctx.evaluateString("\(text)\(userPromptPostfix)", batchSize: 2048, addBos: false)
+        return success
     }
-
+    
     func completion_loop() -> String {
         needsSystemInit = true
         let ret = self.sampling_ctx.sampleAndEvaluate()!
