@@ -135,6 +135,9 @@ std::string llama_token_to_piece(const struct llama_context * ctx, llama_token t
         ret = llama_token_to_piece(llamaContext, the_id);
     }
     [self evalId:the_id];
+    if ([NSString stringWithUTF8String:ret.c_str()] == nil){
+        return @"";
+    }
     return [NSString stringWithUTF8String:ret.c_str()];
 }
 
