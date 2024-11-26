@@ -176,10 +176,27 @@ class AppState: ObservableObject {
         await llamaContext.completion_system_init()
     }
     
+    private func truncateConversationLog(maxLength: Int) {
+        // "###Human:" 기준으로 대화 세트 분리
+        var pairs = conversationLog.components(separatedBy: "###Human:")
+            .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .map { "###Human:" + $0 } // "###Human:" 다시 추가
+        
+        // 글자 수 초과 시 오래된 대화 세트 삭제
+        while pairs.count > 1 && pairs.joined().count > maxLength {
+            pairs.removeFirst() // 가장 오래된 세트 삭제
+        }
+        
+        conversationLog = pairs.joined() // 대화 로그로 결합
+    }
+    
     func complete(text: String, img: UIImage?, isRetry: Bool = false) async {
         ensureContext()
         guard let llamaContext else { return }
-
+        
+        // 대화 로그의 길이를 제한
+        truncateConversationLog(maxLength: 2048)
+        
         // 이미지 입력 처리
         if let img = img {
             DispatchQueue.main.async {
@@ -193,21 +210,21 @@ class AppState: ObservableObject {
         } else if !hasImageEmbedding {
             await llamaContext.clear()
         }
-
+        
         // 입력 Bubble 추가 (재시도인 경우 건너뜀)
         if !isRetry {
             conversationLog += "###Human: \(text) "
             addMessage(text: text, image: img, isUser: true)
         }
-
+        
         DispatchQueue.main.async {
             self.loadingState = .generatingResponse
         }
-
+        
         // completion_init 호출 및 success 상태 확인
         let imageBytesToUse = img != nil ? lastImageBytes : (hasImageEmbedding ? lastImageBytes : nil)
         let success = await llamaContext.completion_init(text: conversationLog, imageBytes: imageBytesToUse)
-
+        
         if !success {
             // 모델 재로딩
             DispatchQueue.main.async {
@@ -218,12 +235,12 @@ class AppState: ObservableObject {
             await complete(text: text, img: img, isRetry: true) // 동일한 입력으로 재시도, `isRetry` 활성화
             return
         }
-
+        
         var collectedResponse = ""
-
+        
         while await llamaContext.n_cur < llamaContext.n_len {
             let result = await llamaContext.completion_loop()
-
+            
             if let range = result.range(of: "###") {
                 let precedingText = result[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
                 collectedResponse += precedingText
@@ -232,17 +249,17 @@ class AppState: ObservableObject {
                 collectedResponse += result
             }
         }
-
+        
         // 정상적인 응답 처리
         collectedResponse = collectedResponse.trimmingCharacters(in: .whitespacesAndNewlines)
         conversationLog += "###Assistant: \(collectedResponse) "
         addMessage(text: collectedResponse, image: nil, isUser: false)
-
+        
         DispatchQueue.main.async {
             self.loadingState = .idle
         }
     }
-
+    
     // 모델 재로드
     private func reloadModel() async {
         guard let llamaContext = llamaContext else {
@@ -254,6 +271,7 @@ class AppState: ObservableObject {
         await llamaContext.clear()
         initializeModel()
     }
+    
     
     func clear() async {
         DispatchQueue.main.async {
@@ -300,4 +318,3 @@ struct ContentView: View {
         }
     }
 }
-
