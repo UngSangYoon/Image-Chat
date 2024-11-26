@@ -21,10 +21,6 @@
     
 ## 사용 가능한 모델
 
-<p align="center">
-    <a><img src="Images/Model Selection.png" width="40%"></a> <br>
-    </p>
-
 - [Model FP 16](https://huggingface.co/Hongik-Project-2024/mmproj-model-f16.gguf)
     - [llava-danube-ko-1.8b-instruct](https://huggingface.co/jjhsnail0822/llava-danube-ko-1.8b-instruct) Fp16 GGUF 모델로 변환
     - 3.75 GB
