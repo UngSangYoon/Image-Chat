@@ -4,12 +4,6 @@
 //
 //  Created by 윤웅상 on 11/2/24.
 
-//
-//  ContentView.swift
-//  llava-ios
-//
-//  Created by 윤웅상 on 11/2/24.
-
 import SwiftUI
 import Foundation
 import Combine
@@ -182,10 +176,11 @@ class AppState: ObservableObject {
         await llamaContext.completion_system_init()
     }
     
-    func complete(text: String, img: UIImage?) async {
+    func complete(text: String, img: UIImage?, isRetry: Bool = false) async {
         ensureContext()
         guard let llamaContext else { return }
-        
+
+        // 이미지 입력 처리
         if let img = img {
             DispatchQueue.main.async {
                 self.loadingState = .embeddingImage
@@ -198,75 +193,66 @@ class AppState: ObservableObject {
         } else if !hasImageEmbedding {
             await llamaContext.clear()
         }
-        
-        conversationLog += "###Human: \(text) "
-        addMessage(text: text, image: img, isUser: true)
-        
+
+        // 입력 Bubble 추가 (재시도인 경우 건너뜀)
+        if !isRetry {
+            conversationLog += "###Human: \(text) "
+            addMessage(text: text, image: img, isUser: true)
+        }
+
         DispatchQueue.main.async {
             self.loadingState = .generatingResponse
         }
-        
+
+        // completion_init 호출 및 success 상태 확인
         let imageBytesToUse = img != nil ? lastImageBytes : (hasImageEmbedding ? lastImageBytes : nil)
-        await llamaContext.completion_init(text: conversationLog, imageBytes: imageBytesToUse)
-        
-        var collectedResponse = ""
-        var generationCompleted = false
-        var invalidResponseDetected = false // 응답 유효성 확인 플래그
-        
-        while await llamaContext.n_cur < llamaContext.n_len {
-            var result = await llamaContext.completion_loop()
-            
-            // 응답 검증: 유효하지 않은 경우 중단
-            if isInvalidResponse(result) {
-                invalidResponseDetected = true
-                break
+        let success = await llamaContext.completion_init(text: conversationLog, imageBytes: imageBytesToUse)
+
+        if !success {
+            // 모델 재로딩
+            DispatchQueue.main.async {
+                self.loadingState = .reloadingModel
             }
-            
+            await reloadModel()
+            print("Model reloaded. Retrying the same input...")
+            await complete(text: text, img: img, isRetry: true) // 동일한 입력으로 재시도, `isRetry` 활성화
+            return
+        }
+
+        var collectedResponse = ""
+
+        while await llamaContext.n_cur < llamaContext.n_len {
+            let result = await llamaContext.completion_loop()
+
             if let range = result.range(of: "###") {
                 let precedingText = result[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
                 collectedResponse += precedingText
-                generationCompleted = true
-                break
-            } else if let range = result.range(of: "</s>") {
-                let precedingText = result[..<range.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
-                collectedResponse += precedingText
-                generationCompleted = true
                 break
             } else {
                 collectedResponse += result
             }
         }
-        
-        if invalidResponseDetected {
-            // 유효하지 않은 응답 처리
-            DispatchQueue.main.async {
-                self.addMessage(
-                    text: "모델 생성 한계에 도달했습니다. 아래로 스와이프해 새로고침해 주세요.",
-                    image: nil,
-                    isUser: false
-                )
-                self.loadingState = .idle
-            }
-        } else {
-            // 정상적인 응답 처리
-            collectedResponse = collectedResponse.trimmingCharacters(in: .whitespacesAndNewlines)
-            conversationLog += "###Assistant: \(collectedResponse) "
-            addMessage(text: collectedResponse, image: nil, isUser: false)
-            
-            DispatchQueue.main.async {
-                self.loadingState = .idle
-            }
+
+        // 정상적인 응답 처리
+        collectedResponse = collectedResponse.trimmingCharacters(in: .whitespacesAndNewlines)
+        conversationLog += "###Assistant: \(collectedResponse) "
+        addMessage(text: collectedResponse, image: nil, isUser: false)
+
+        DispatchQueue.main.async {
+            self.loadingState = .idle
         }
     }
 
-    // 유효하지 않은 응답 확인 로직
-    private func isInvalidResponse(_ response: String) -> Bool {
-        // "<s>" 혹은 <unk>가 포함
-        if response.contains("<s>") ||
-            response.contains("<unk>") {
-            return true
+    // 모델 재로드
+    private func reloadModel() async {
+        guard let llamaContext = llamaContext else {
+            print("No existing LlamaContext to reload.")
+            return
         }
-        return false
+
+        // 모델 초기화 작업
+        await llamaContext.clear()
+        initializeModel()
     }
     
     func clear() async {
@@ -314,3 +300,4 @@ struct ContentView: View {
         }
     }
 }
+
